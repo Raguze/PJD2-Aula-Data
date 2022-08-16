@@ -8,9 +8,23 @@ public class MapManager
 
     public void AddCube(float x, float y)
     {
-        var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(x, y);
         string key = $"{x}_{y}";
-        map.Add(key, go);
+        map.Add(
+            key,
+            GameObject.CreatePrimitive(PrimitiveType.Cube)
+                .Position(x, y)
+                //.Rotation(0, 0, 45)
+                //.Scale(0.8f)
+        ); ;
+    }
+
+    public void AddCube(string key)
+    {
+        var v = key.MapCell().ToFloatArray();
+        map.Add(
+            key,
+            GameObject.CreatePrimitive(PrimitiveType.Cube)
+                .Position(v)
+        );
     }
 }
